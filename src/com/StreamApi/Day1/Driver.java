@@ -37,12 +37,14 @@ public class Driver {
 		            new Product(105, "Keyboard", 3000, true)
 		        );
 		  
-		  List<Product> result = products.stream().filter(x->x.active).filter(x->x.Price>=5000).map(x->{
+		  List<Product> result = products.stream().filter(x->x.active).filter(x->x.Price>=5000)// it predicate the value if true then keep if false then remove
+				  .map(x->{// same as peek
 			  x.Price = x.Price + 1000;
 			  return x;
-		  }).peek(x->{
+		  }).peek(x->{// its a intermediate method and it helps to Transform each element and perform some task
 			  x.Price = x.Price - 1000;
-		  }).sorted(Comparator.comparingInt(x->x.Price)).collect(Collectors.toList());
+		  }).sorted(Comparator.comparingInt(x->x.Price))//its a sorted method which is use comparator and do task
+				  .collect(Collectors.toList());//its a terminate method which is collect the data and store and return a list. 
 		  System.out.println(result);
 		  List<Product> result1 = result.stream().map(x ->{ x.Price = x.Price + 1000; return x;}).collect(Collectors.toList());
 		  System.out.println(result1);
