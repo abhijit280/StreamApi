@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Temp {
 
@@ -13,6 +14,11 @@ public class Temp {
 				885, 48, 8, 5, 879, 8);
 //		Collections.sort(num);	//	this is the utility class to sort the list .
 //		System.out.println(num);
+		num.stream().min((a,b)->a-b).get();
+		num.stream().max((a,b)->a-b).get();
+		int numm = num.stream().reduce(0, (a,b)->a+b);
+		num.stream().filter(a->a%2==0).sorted((a,b)->b.compareTo(a)).skip(2).findFirst().get();//even num
+		int sum = num.stream().filter(a->a%2!=0).reduce(0,(a,b)->a+b);//it reduce the length and add the numbers
 		List<Integer> desendingsortedUniqueNum = num.stream().distinct().sorted((a, b) -> b - a)
 				.collect(Collectors.toList());// distinct remove the all duplicate element
 		System.out.println(desendingsortedUniqueNum);
@@ -47,6 +53,9 @@ public class Temp {
 				/* used for the intstream to char */.filter(a -> name.indexOf(a) == name.lastIndexOf(a))
 				/* then filter */.findFirst();
 		System.out.println(str.get());
+		List<String>list1 = Arrays.asList("spring", "hibernate", "servlet");
+		List<String>list2 = Arrays.asList("html", "css", "javascript");
+		Stream.concat(list1.stream(), list2.stream()).distinct().forEach(w->System.out.println(w));//concat used for add two lists
 	}
 
 }

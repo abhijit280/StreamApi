@@ -28,6 +28,7 @@ public class Test {
 		System.out.println(list);
 		Map<Integer, List<Products>>list1 = list.stream().collect(Collectors.groupingBy(a->a.toString().length()));
 		System.out.println(list1);
+		
 	}
 
 }
