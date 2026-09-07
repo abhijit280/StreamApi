@@ -77,6 +77,26 @@ public class Demo {
 		List<String> names2 = Arrays.asList("Abhi", "Amit", "Anil", "Rahul", "Arjun", "Aman");
 		List<String> result =names2.stream().distinct().map(a->a.toUpperCase()).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 		System.out.println(result);
+		
+		
+		List<Integer> nums3 = Arrays.asList(10, 15, 20, 25, 30, 35, 40);
+		int store = nums3.stream().filter(a->a>20).mapToInt(n -> n).sum();
+		System.out.println(store);
+		
+		
+		List<Integer> nums4 = Arrays.asList(10, 45, 20, 80, 35, 60);
+		int num = nums4.stream().mapToInt(a->a).max().orElse(0);
+		System.out.println(num);
+		
+		
+		String names3 = "abhijit";
+
+		IntStream namesss = names3.chars();
+
+		Character a = namesss.mapToObj(n -> (char) n).findFirst().get();
+		
+		Character namess = names3.chars().mapToObj(n->(char)n).filter(n->names3.indexOf(n)==names3.lastIndexOf(n)).findFirst().get();
+		
 	}
 
 }
