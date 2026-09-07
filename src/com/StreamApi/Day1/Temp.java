@@ -42,17 +42,23 @@ public class Temp {
 		System.out.println("2nd Lowest Number : " + secLowestNum);
 		Optional<Integer> lowestNum = ascendingsortedUniqueNum.stream().findFirst();// here is the example of this.
 		System.out.println("Lowest Number : " + lowestNum.get());
+		
+		
 		List<List<String>> words = Arrays.asList(Arrays.asList("java", "python", "c++"),
 				Arrays.asList("spring", "hibernate", "servlet"), Arrays.asList("html", "css", "javascript"),
 				Arrays.asList("mysql", "mongodb", "oracle"));
 		Map<Object, List<String>>group = words.stream().flatMap(a->a.stream()).filter(a->a.length()>4).collect(Collectors.groupingBy(a->a.length()));
 		System.out.println(group);
+		
+		
 		String name = "swiss";
 		Optional<Character> str = name.chars()
 				/* String to char int stream */.mapToObj(a -> (char) a)
 				/* used for the intstream to char */.filter(a -> name.indexOf(a) == name.lastIndexOf(a))
 				/* then filter */.findFirst();
 		System.out.println(str.get());
+		
+		
 		List<String>list1 = Arrays.asList("spring", "hibernate", "servlet");
 		List<String>list2 = Arrays.asList("html", "css", "javascript");
 		Stream.concat(list1.stream(), list2.stream()).distinct().forEach(w->System.out.println(w));//concat used for add two lists
