@@ -61,7 +61,7 @@ public class Temp {
 		
 		List<String>list1 = Arrays.asList("spring", "hibernate", "servlet");
 		List<String>list2 = Arrays.asList("html", "css", "javascript");
-		Stream.concat(list1.stream(), list2.stream()).distinct().forEach(w->System.out.println(w));//concat used for add two lists
+		Stream.concat(list1.stream(), list2.stream()).distinct().forEach(w->System.out.println(w));//concat used for add two collection
 	}
 
 }

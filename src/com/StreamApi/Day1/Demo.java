@@ -3,6 +3,7 @@ package com.StreamApi.Day1;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -57,8 +58,8 @@ public class Demo {
 		
 		
 		List<String> prices = Arrays.asList("100", "250", "50", "400", "150", "250");
-		int sum = prices.stream().mapToInt(x->Integer.parseInt(x)).filter(a->a>100).distinct().reduce(0, (a,b)->a+b);
-		System.out.println(sum);
+		int sum = prices.stream().map(x->Integer.parseInt(x)).filter(a->a>100).distinct().reduce(0, (a,b)->a+b);
+		System.out.println("sum"+sum);
 		
 		
 		List<Integer> nums1 = Arrays.asList(10, 15, 20, 25, 30, 15, 40, 50, 20, 60);
@@ -96,6 +97,11 @@ public class Demo {
 		Character a = namesss.mapToObj(n -> (char) n).findFirst().get();
 		
 		Character namess = names3.chars().mapToObj(n->(char)n).filter(n->names3.indexOf(n)==names3.lastIndexOf(n)).findFirst().get();
+		
+		
+		String word = "programming";
+		Map<Character, Long> w = word.chars().mapToObj(A->(char)A).collect(Collectors.groupingBy(b->b,Collectors.counting()));
+		System.out.println(w);
 		
 	}
 
