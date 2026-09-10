@@ -1,6 +1,7 @@
 package com.StreamApi.Day1;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -103,6 +104,7 @@ public class Demo {
 		Map<Character, Long> w = word.chars().mapToObj(A->(char)A).collect(Collectors.groupingBy(b->b,Collectors.counting()));
 		System.out.println(w);
 		
+	
 	}
 
 }
