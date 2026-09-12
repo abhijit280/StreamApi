@@ -28,9 +28,10 @@ public class Driver {
 				"hibernate");
 //		list.stream().filter(a->a.startsWith("j")).limit(1).forEach(a->System.out.println(a));
 //		list.stream().sorted().skip(2).forEach(System.out::println);
-		list.stream().filter(a -> list.indexOf(a) != list.lastIndexOf(a)).distinct()
-				.forEach(a -> System.out.println(a));
-
+		Map<Integer, List<String>> h = list.stream().filter(a -> list.indexOf(a) != list.lastIndexOf(a)).distinct().collect(Collectors.groupingBy(a->a.length()));
+			
+		System.out.println(h);
+		
 		String word = "mississippi";
 		Map<Object, Long> frequency = word.chars().mapToObj(a -> (char) a)
 				.collect(Collectors.groupingBy(a -> a, Collectors.counting()));
@@ -38,6 +39,8 @@ public class Driver {
 		System.out.println(frequency);
 		char hschar = word.chars().mapToObj(a->(char)a).filter(a->frequency.get(a)>1).findFirst().get();
 		System.out.println(hschar+" : "+frequency.get(hschar));
+		
+		
 		
 	}
 
