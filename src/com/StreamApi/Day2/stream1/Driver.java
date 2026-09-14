@@ -31,14 +31,14 @@ class Employee {
 		return salary;
 	}
 
-	@Override
-	public int hashCode() {
-		return this.name.hashCode();
-	}
-	public boolean equals(Object obj) {
-		Employee emp = (Employee)obj;
-		return this.name.equals(emp.name);
-	}
+//	@Override
+//	public int hashCode() {
+//		return this.name.hashCode();
+//	}
+//	public boolean equals(Object obj) {
+//		Employee emp = (Employee)obj;
+//		return this.name.equals(emp.name);
+//	}
     
 
 }
@@ -153,5 +153,37 @@ public class Driver {
 						.comparing(Employee::getSalary).reversed()).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase).sorted()
 				.collect(Collectors.toList()))));// iused tomap inside the collectors but use the to map you should override the hashcode and equals inside the employee class
 		System.out.println(result2);
+		
+//		Consider only employees whose salary is greater than ₹35,000.
+//		Group employees by department.
+//		For each department:
+//		Remove duplicate employees based on name.
+//		If duplicate names exist, keep the employee with the higher salary.
+//		Sort employees by salary in descending order.
+//		Skip the highest-paid employee.
+//		Take the next 2 employees.
+//		Extract their names.
+//		Convert names to uppercase.
+//		Sort the final names alphabetically.
+//		Store the result as:
+		
+		Map<String, List<String>> result3 = employees.stream().filter(a->a.getSalary()>35000).collect(Collectors.groupingBy(Employee::getDepartment,Collectors
+				.collectingAndThen(Collectors.toList(), list->list.stream().collect(Collectors.toMap(Employee::getName, a->a, (c,b)->c.getSalary()>b.getSalary() ? c : b))
+						.values().stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase)
+						.sorted().collect(Collectors.toList()))));
+		
+//		Consider employees with salary ≥ 30,000.
+//		Partition them into:
+//		true → salary ≥ 60,000
+//		false → salary < 60,000
+//		For each partition:
+//		Group by department.
+//		Remove duplicate names (keep highest salary).
+//		Find the average salary of that department.
+//		Return:
+		
+		Map<Boolean, Map<String, Double>> result4 = employees.stream().filter(a->a.getSalary()>=30000).collect(Collectors.partitioningBy(a->a.getSalary()>=60000,Collectors.groupingBy(Employee::getDepartment
+				,Collectors.collectingAndThen(Collectors.toList(), list -> list.stream().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b.getSalary()>c.getSalary() ? b:c ))
+						.values().stream().mapToDouble(Employee::getSalary).average().orElse(0.0)))));
 	}
 }
