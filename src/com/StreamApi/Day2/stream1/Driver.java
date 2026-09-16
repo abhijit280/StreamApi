@@ -148,8 +148,8 @@ public class Driver {
 //				, list -> list.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).skip(1).map(Employee::getName).distinct().limit(2).map(String::toUpperCase)
 //				.sorted().collect(Collectors.toList()))));
 		
-		Map<String, List<String>>result2 = employees.stream().filter(a->a.getSalary()>40000).collect(Collectors.groupingBy(a->a.getDepartment(),Collectors.collectingAndThen(Collectors.toList()
-				, list -> list.stream().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b)).values().stream().sorted(Comparator
+		Map<String, List<String>>result2 = employees.parallelStream().filter(a->a.getSalary()>40000).collect(Collectors.groupingBy(a->a.getDepartment(),Collectors.collectingAndThen(Collectors.toList()
+				, list -> list.stream().parallel().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b)).values().stream().sorted(Comparator
 						.comparing(Employee::getSalary).reversed()).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase).sorted()
 				.collect(Collectors.toList()))));// iused tomap inside the collectors but use the to map you should override the hashcode and equals inside the employee class
 		System.out.println(result2);
@@ -185,5 +185,22 @@ public class Driver {
 		Map<Boolean, Map<String, Double>> result4 = employees.stream().filter(a->a.getSalary()>=30000).collect(Collectors.partitioningBy(a->a.getSalary()>=60000,Collectors.groupingBy(Employee::getDepartment
 				,Collectors.collectingAndThen(Collectors.toList(), list -> list.stream().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b.getSalary()>c.getSalary() ? b:c ))
 						.values().stream().mapToDouble(Employee::getSalary).average().orElse(0.0)))));
+		
+		
+//		Consider employees whose salary is greater than ₹40,000.
+//		Group employees by department.
+//		For each department:
+//		Remove duplicate employees based on name.
+//		Sort employees by salary in descending order.
+//		Skip the highest-paid employee.
+//		Take the next 2 employees.
+//		Extract their names.
+//		Convert names to uppercase.
+//		Sort the final names alphabetically.
+//		Store the result in:
+		
+		Map<String, List<String>>result5 = employees.stream().filter(a->a.getSalary()>40000).collect(Collectors.groupingBy(Employee::getName,Collectors.collectingAndThen(Collectors.toList(),
+				list->list.stream().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b)).values().stream().sorted(Comparator.comparing(Employee::getSalary).reversed()
+						).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase).sorted().collect(Collectors.toList()))));
 	}
 }

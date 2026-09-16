@@ -53,6 +53,10 @@ public class Demo {
 		
 		Map<Boolean, String>part = names.stream().collect(Collectors.partitioningBy(a->a.length()>4 ,Collectors.mapping(a->a, Collectors.joining(","))) );
 		System.out.println(part);
-	}
-
-}
+		
+		
+		
+		String name = "abhijita";
+		char chars =  name.chars().mapToObj(a->(char)a).filter(a->name.indexOf(a)== name.lastIndexOf(a)).findFirst().get();
+		System.out.println(chars);
+	}}
