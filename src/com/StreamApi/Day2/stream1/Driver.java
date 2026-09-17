@@ -30,6 +30,10 @@ class Employee {
 	public double getSalary() {
 		return salary;
 	}
+	@Override
+	public String toString() {
+		return "Employee [id=" + id + ", name=" + name + ", department=" + department + ", salary=" + salary + "]";
+	}
 
 //	@Override
 //	public int hashCode() {
@@ -202,5 +206,7 @@ public class Driver {
 		Map<String, List<String>>result5 = employees.stream().filter(a->a.getSalary()>40000).collect(Collectors.groupingBy(Employee::getName,Collectors.collectingAndThen(Collectors.toList(),
 				list->list.stream().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b)).values().stream().sorted(Comparator.comparing(Employee::getSalary).reversed()
 						).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase).sorted().collect(Collectors.toList()))));
+		Employee outputs =  employees.stream().filter(a->a.getDepartment() == "IT") .sorted(Comparator.comparing(Employee::getSalary).reversed()).findFirst().get();
+		System.out.println(outputs);
 	}
 }
