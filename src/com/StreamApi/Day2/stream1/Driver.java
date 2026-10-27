@@ -154,7 +154,7 @@ public class Driver {
 		
 		Map<String, List<String>>result2 = employees.parallelStream().filter(a->a.getSalary()>40000).collect(Collectors.groupingBy(a->a.getDepartment(),Collectors.collectingAndThen(Collectors.toList()
 				, list -> list.stream().parallel().collect(Collectors.toMap(Employee::getName, a->a,(b,c)->b)).values().stream().sorted(Comparator
-						.comparing(Employee::getSalary).reversed()).skip(1).limit(2).map(Employee::getName).map(String::toUpperCase).sorted()
+						.comparing(Employee::getSalary).reversed()).skip(1).peek(null).limit(2).map(Employee::getName).map(String::toUpperCase).sorted()
 				.collect(Collectors.toList()))));// iused tomap inside the collectors but use the to map you should override the hashcode and equals inside the employee class
 		System.out.println(result2);
 		
