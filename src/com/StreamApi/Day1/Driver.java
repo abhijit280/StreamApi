@@ -42,7 +42,7 @@ public class Driver {
 			  x.Price = x.Price + 1000;
 			  return x;
 		  }).peek(x->{// its a intermediate method and it helps to Transform each element and perform some task
-			  x.Price = x.Price - 1000;
+			  x.Price = x.Price - 5000;
 		  }).sorted(Comparator.comparingInt(x->x.Price))//its a sorted method which is use comparator and do task
 				  .collect(Collectors.toList());//its a terminate method which is collect the data and store and return a list. 
 		  System.out.println(result);
