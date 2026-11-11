@@ -37,6 +37,8 @@ public class Driver {
 		            new Product(105, "Keyboard", 3000, true)
 		        );
 		  
+		  List<Product>trueActive = products.stream().filter(a->a.active).collect(Collectors.toList());
+		  System.out.println(trueActive +"hello");
 		  List<Product> result = products.stream().filter(x->x.active).filter(x->x.Price>=5000)// it predicate the value if true then keep if false then remove
 				  .map(x->{// same as peek
 			  x.Price = x.Price + 1000;
