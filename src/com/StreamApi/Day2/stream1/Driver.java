@@ -35,14 +35,14 @@ class Employee {
 		return "Employee [id=" + id + ", name=" + name + ", department=" + department + ", salary=" + salary + "]";
 	}
 
-//	@Override
-//	public int hashCode() {
-//		return this.name.hashCode();
-//	}
-//	public boolean equals(Object obj) {
-//		Employee emp = (Employee)obj;
-//		return this.name.equals(emp.name);
-//	}
+	@Override
+	public int hashCode() {
+		return this.name.hashCode();
+	}
+	public boolean equals(Object obj) {
+		Employee emp = (Employee)obj;
+		return this.name.equals(emp.name);
+	}
     
 
 }
